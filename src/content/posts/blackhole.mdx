@@ -1,0 +1,157 @@
+---
+title: Blackhole - Your Easy File Sharing Solution
+description: Explore the technology behind Blackhole, a powerful yet straightforward file-sharing application built with a modern tech stack. We'll walk through the construction process and highlight interesting code snippets that showcase the application's functionality.
+image: "https://ik.imagekit.io/omraval18/blackhole_nSEa4pSPgi.png?updatedAt=1718547016213"
+date: "2024-06-08"
+github: "https://github.com/omraval18/blackhole"
+
+authors: 
+  - omraval
+---
+
+In this blog post, we'll delve into the intricacies of Blackhole, a powerful yet straightforward file-sharing application built with a modern tech stack. We'll discuss the technology behind it, walk through the construction process, and even highlight some interesting code snippets that showcase the application's functionality.
+
+## Tech Stack Breakdown
+
+Blackhole leverages a combination of technologies to deliver a seamless and secure file-sharing experience. Here's a breakdown of its tech stack:
+
+- **Frontend**: HTML, CSS, JavaScript. Blackhole uses Bulma, a popular CSS framework, to create a visually appealing and user-friendly interface.
+- **Backend**: Node.js, Express.js. Node.js provides a fast and efficient environment for building the backend, while Express.js helps create a robust API for handling file uploads, downloads, and email communications.
+- **Database**: MongoDB. MongoDB is a NoSQL database that provides flexible storage for file metadata, including filenames, upload times, and recipient information.
+- **Email Service**: Nodemailer. Nodemailer is a popular Node.js library that simplifies sending emails, crucial for notifying recipients about shared files.
+- **QR Code Generation**: qrcode. This library generates QR codes that can be scanned for quick file access, enhancing convenience for users.
+- **File Handling**: Multer. Multer is a powerful Node.js library that handles file uploads, providing options for managing file sizes and destinations.
+- **Time Ago Formatting**: timeago.js. This library converts timestamps into user-friendly "time ago" strings, adding a touch of human readability to the file listings.
+
+## Building Blackhole
+
+The development of Blackhole followed a typical development workflow:
+
+1. **Project Setup**: A new Node.js project was created with necessary packages like Express.js and MongoDB.
+
+2. **Database Design**: A MongoDB schema was defined to store file information:
+
+```javascript
+const fileSchema = new Schema({
+    filename: { type: String, required: true },
+    path: { type: String, required: true },
+    size: { type: Number, required: true },
+    uuid: { type: String, required: true },
+    sender: { type: String, required: false },
+    recipients: { type: [String] },
+}, { timestamps: true });
+
+module.exports = mongoose.model('File', fileSchema);
+```
+
+3. **API Development**: The backend was built with Express.js to handle routes for file uploads, downloads, and email sending.
+
+File Upload Route:
+
+```javascript
+router.post("/", (req, res) => {
+    upload(req, res, async (err) => {
+        if (!req.file) {
+            return res.status(400).json({ error: "File missing" });
+        }
+        if (err) {
+            return res.status(500).send({ error: err.message });
+        }
+        const file = new File({
+            filename: req.file.filename,
+            uuid: uuid4(),
+            path: req.file.path,
+            size: req.file.size,
+        });
+        const response = await file.save();
+        // ... rest of the code to generate and send response ...
+    });
+});
+```
+
+Email Sending Route:
+
+```javascript
+router.post("/sendmail", async (req, res) => {
+    // ... code to validate request data and fetch file from DB ... 
+    const sendMail = require("../services/emailService");
+    sendMail({
+        from: sender,
+        to: recipient,
+        subject: "New Shared File",
+        // ... rest of email data ...
+    })
+    // ... rest of the code to handle email response ...
+});
+```
+
+4. **Frontend Development**: The frontend was created using HTML, CSS, and JavaScript. A simple drag-and-drop interface was implemented to enable users to easily upload files.
+
+5. **Integration and Testing**: The frontend and backend components were integrated and thoroughly tested to ensure seamless functionality and user experience.
+
+## Blackhole in Action
+
+### File Sharing Process:
+
+1. **Upload**: Users can drag-and-drop a file onto the Blackhole interface or select a file using the "Select file" button.
+2. **Progress Monitoring**: A progress bar visually displays the upload progress.
+3. **Download Link Generation**: Once the upload is complete, Blackhole generates a unique download link and a corresponding QR code.
+4. **Sharing Options**: Users can copy the download link, which can be shared via various methods, or send the link directly to a recipient via email.
+5. **Email Notification**: Blackhole sends an email notification to the recipient containing a download link and information about the shared file.
+6. **File Download**: Recipients can access the file by clicking the download link in the email or scanning the QR code.
+
+### Cleanup Functionality:
+
+1. **Automatic Cleanup**: Files that are older than 24 hours are automatically deleted from the Blackhole storage.
+2. **Manual Cleanup**: Users can manually initiate a cleanup process to delete all files older than 24 hours.
+
+## Interesting Code Snippets
+
+### Email Template Generation:
+
+```javascript
+module.exports = ({ sender, downloadLink, siteLink, size, expires }) => {
+    return `
+        <!doctype html>
+        <html>
+        <!-- ... rest of the email template ... -->
+        <a href="${downloadLink}" target="_blank"
+            style="display: inline-block; color: #ffffff; background-color: #3498db; border: solid 1px #3498db; border-radius: 5px; box-sizing: border-box; cursor: pointer; text-decoration: none; font-size: 14px; font-weight: bold; margin: 0; padding: 12px 25px; text-transform: capitalize; border-color: #3498db;">Download</a> 
+        <!-- ... rest of the email template ... -->
+    `;
+};
+```
+
+### File Listing and Cleanup Route:
+
+```javascript
+router.get("/", async (req, res) => {
+    // ... code to fetch files older than 24 hours ...
+    if (oldfiles.length) {
+        for (const file of oldfiles) {
+            try {
+                fs.unlinkSync(file.path);
+                await file.remove();
+                console.log(`successfully deleted ${file.filename}`);
+            } catch (err) {
+                console.log(`error while deleting file ${err} `);
+            } finally {
+                tobeDeletedFiles.push(file._id);
+            }
+        }
+    }
+    // ... code to delete files and render cleanup page ...
+});
+```
+
+### User Interface Enhancements:
+
+- **Drag-and-Drop**: The frontend utilizes JavaScript event listeners to handle drag-and-drop functionality, making file uploads intuitive.
+- **Progress Bar**: The progress bar provides real-time feedback to users, enhancing the user experience and keeping them informed during file uploads.
+- **QR Code Display**: QR code generation allows users to easily access shared files with a simple scan, adding convenience and reducing the need for manual copying and pasting of links.
+
+## Conclusion
+
+Blackhole provides a streamlined and efficient solution for sharing files. The chosen tech stack, combined with careful design and implementation, delivers a user-friendly experience with a focus on simplicity and ease of use. The application's functionality, bolstered by features like automatic cleanup and QR code generation, makes file sharing both convenient and secure.
+
+This blog post has provided a detailed look at Blackhole's tech stack, construction process, and core functionalities. By understanding the underlying technology and the workflow behind the application, developers and users alike can gain a deeper appreciation for the power and simplicity of Blackhole.

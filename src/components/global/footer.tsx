@@ -31,12 +31,12 @@ export default function Footer() {
                         </Tooltip>
                         <Tooltip>
                             <TooltipTrigger asChild>
-                                <Link href="/contact">
+                                <Link href="https://drive.google.com/file/d/1f11YXr2vD6d2_qhLlnewjmRjBKiHk9di/view?usp=sharing">
                                     <Button variant={"secondary"}>Resume</Button>
                                 </Link>
                             </TooltipTrigger>
                             <TooltipContent className="text-center">
-                                <p>Contact Me</p>
+                                <p>My Resume</p>
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>

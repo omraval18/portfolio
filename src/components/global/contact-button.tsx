@@ -10,7 +10,7 @@ import Link from "next/link";
 
 export function ContactButton() {
     return (
-            <div className="fixed z-40 bottom-4 right-4 ">
+            <div className="fixed z-50 md:bottom-4 right-4 bottom-28 ">
                 <FamilyButton>
                     <OgImageSection />
                 </FamilyButton>
@@ -49,7 +49,7 @@ export function OgImageSection() {
                 );
             case 1:
                 return (
-                    <Link href={"mailto:omrawal111@gmail.com"}>
+                    <Link href={"mailto:omrawal111@gmail.com"} >
                         <div className="flex items-center justify-center">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -153,7 +153,7 @@ export function OgImageSection() {
                         className={`${
                             activeTab === tab.id ? "text-white " : "hover:text-neutral-300/60"
                         } relative rounded-[5px] px-3 py-1.5 text-xs sm:text-sm font-medium text-white  transition focus-visible:outline-1 focus-visible:ring-1 focus-visible:ring-blue-light focus-visible:outline-none`}
-                        style={{ WebkitTapHighlightColor: "transparent" }}
+                        style={{ WebkitTapHighlightColor: "black" }}
                     >
                         {activeTab === tab.id && (
                             <motion.span
@@ -169,11 +169,11 @@ export function OgImageSection() {
             </div>
             <MotionConfig transition={{ duration: 0.4, type: "spring", bounce: 0.2 }}>
                 <motion.div
-                    className="relative mx-auto my-[10px] w-[60px] md:w-[150px] overflow-hidden"
+                    className="relative mx-auto my-[10px] w-[150px] md:w-[150px] overflow-hidden"
                     initial={false}
                     animate={{ height: bounds.height }}
                 >
-                    <div className="md:p-6 p-2" ref={ref}>
+                    <div className="md:p-6 p-2 w-full" ref={ref}>
                         <AnimatePresence
                             custom={direction}
                             mode="popLayout"

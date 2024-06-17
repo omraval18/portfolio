@@ -17,43 +17,40 @@ const FamilyButton: React.FC<FamilyButtonProps> = ({ children }) => {
   const toggleExpand = () => setIsExpanded(!isExpanded)
 
   return (
-    <div
-      className={cn(
-        "rounded-[24px] border border-black/10  shadow-sm dark:border-yellow-400/20",
-        "bg-gradient-to-b  from-neutral-900 to-black",
-        isExpanded
-          ? "w-[250px] bg-gradient-to-b dark:from-stone-900 dark:to-neutral-900/80"
-          : "dark:from-neutral-900 dark:to-stone-950 bg-gradient-to-b"
-      )}
-    >
-      <div className="rounded-[23px] border   border-black/10 ">
-        <div className="rounded-[22px] border  dark:border-stone-800 border-white/50 ">
-          <div className="rounded-[21px] border    border-neutral-950/20   flex items-center justify-center ">
-            <FamilyButtonContainer
-              isExpanded={isExpanded}
-              toggleExpand={toggleExpand}
-            >
-              {isExpanded ? (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{
-                    opacity: 1,
-                    transition: {
-                      delay: 0.3,
-                      duration: 0.4,
-                      ease: "easeOut",
-                    },
-                  }}
-                >
-                  {children}
-                </motion.div>
-              ) : null}
-            </FamilyButtonContainer>
+      <div
+          className={cn(
+              "rounded-[24px] border border-black/10  shadow-sm dark:border-yellow-400/20",
+              "bg-gradient-to-b  from-neutral-900 to-black",
+              isExpanded
+                  ? "w-[250px] bg-gradient-to-b dark:from-stone-900 dark:to-neutral-900/80 supports-backdrop-blur:bg-muted/90 backdrop-blur-lg"
+                  : "dark:from-neutral-900 dark:to-stone-950 bg-gradient-to-b"
+          )}
+      >
+          <div className="rounded-[23px] border   border-black/10 ">
+              <div className="rounded-[22px] border  dark:border-stone-800 border-white/50 ">
+                  <div className="rounded-[21px] border    border-neutral-950/20   flex items-center justify-center ">
+                      <FamilyButtonContainer isExpanded={isExpanded} toggleExpand={toggleExpand}>
+                          {isExpanded ? (
+                              <motion.div
+                                  initial={{ opacity: 0 }}
+                                  animate={{
+                                      opacity: 1,
+                                      transition: {
+                                          delay: 0.3,
+                                          duration: 0.4,
+                                          ease: "easeOut",
+                                      },
+                                  }}
+                              >
+                                  {children}
+                              </motion.div>
+                          ) : null}
+                      </FamilyButtonContainer>
+                  </div>
+              </div>
           </div>
-        </div>
       </div>
-    </div>
-  )
+  );
 }
 
 // A container that wraps content and handles animations

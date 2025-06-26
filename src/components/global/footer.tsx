@@ -31,7 +31,7 @@ export default function Footer() {
                         </Tooltip>
                         <Tooltip>
                             <TooltipTrigger asChild>
-                                <Link href="https://drive.google.com/file/d/1f11YXr2vD6d2_qhLlnewjmRjBKiHk9di/view?usp=sharing">
+                                <Link href={process.env.NEXT_PUBLIC_RESUME_URL!}>
                                     <Button variant={"secondary"}>Resume</Button>
                                 </Link>
                             </TooltipTrigger>

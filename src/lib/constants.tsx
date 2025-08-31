@@ -2,6 +2,25 @@ import { ExperienceCardData } from "@/components/global/experience-card";
 
 export const projects: ExperienceCardData[] = [
   {
+    title: "nClip",
+    description:
+      "nClip is a modern web tool that transforms long-form videos into concise, AI-generated highlights. Its backend is powered by FastAPI, leveraging whisper-based transcription, LLM-driven topic detection, GPU-accelerated processing, and Digial Ocean Bucket storage all orchestrated via serverless Architecture. The Clien Side Fullstack app , built with React, TypeScript, and Hono, delivers a lightning-fast user experience: drag-and-drop uploads, status tracking, and video playback with real-time updates, all handled with Vite and React Query.",
+    tags: [
+      "Python",
+      "TypeScript",
+      "Docker",
+      "Postgres",
+      "FastAPI",
+      "Digital Ocean",
+      "Payments integration",
+      "RBAC",
+      "CI/CD",
+      "GitHub Actions",
+      "Hono",
+      "React/Vite",
+    ],
+  },
+  {
     title: "Mani AI",
     description:
       "Mani is an coding agent web app like lovable,v0, etc. It uses multiple tools to read,write and run commands, in sandbox environment. It has live preview of built website available and it's code in read only editor.",

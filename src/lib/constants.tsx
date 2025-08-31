@@ -19,6 +19,8 @@ export const projects: ExperienceCardData[] = [
       "Hono",
       "React/Vite",
     ],
+    live: "https://nclip.omraval.live/",
+    code: "https://github.com/omraval18/nclip",
   },
   {
     title: "Mani AI",

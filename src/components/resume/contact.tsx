@@ -1,4 +1,5 @@
 import { BOOK_URL } from "@/lib/resume";
+import { CopyPrompt } from "./copy-prompt";
 import { Section } from "./section";
 
 export function Contact() {
@@ -20,6 +21,12 @@ export function Contact() {
         >
           omrawal111@gmail.com
         </a>
+      </div>
+      <div className="mt-8 max-w-sm">
+        <p className="mb-2 text-sm text-neutral-500">
+          Or let your AI assistant read my resume and answer for you.
+        </p>
+        <CopyPrompt />
       </div>
       <div className="mt-12 text-xs text-neutral-700">
         <span>© {new Date().getFullYear()} Om Raval</span>

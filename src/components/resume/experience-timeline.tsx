@@ -1,4 +1,4 @@
-import { experience, slug, type Job } from "@/lib/resume";
+import { experience, fullTimeExperience, slug, yearsExperience, type Job } from "@/lib/resume";
 import { Emph } from "./emphasis";
 import { Section } from "./section";
 
@@ -21,8 +21,23 @@ function Entry({ job }: { job: Job }) {
         </h3>
         <span className="font-mono text-xs text-neutral-600">{job.dates}</span>
       </div>
-      <p className="mt-1 text-xs text-neutral-600">{job.place}</p>
-      <p className="mt-4 text-sm leading-relaxed text-neutral-400">{job.summary}</p>
+      <p className="mt-1 flex flex-wrap items-center gap-2 text-xs text-neutral-600">
+        <span>{job.place}</span>
+        {job.type && (
+          <span
+            className={`rounded-full border px-2 py-px text-[10px] uppercase tracking-widest ${
+              job.type === "Full-time"
+                ? "border-white/20 text-neutral-300"
+                : "border-dashed border-white/15 text-neutral-500"
+            }`}
+          >
+            {job.type}
+          </span>
+        )}
+      </p>
+      <p className="mt-4 text-sm leading-relaxed text-neutral-400">
+        <Emph text={job.summary} />
+      </p>
       {job.highlight && (
         <p className="mt-4 border-l border-white/30 pl-3 text-sm leading-relaxed text-neutral-200">
           <Emph text={job.highlight} />
@@ -59,6 +74,12 @@ function Entry({ job }: { job: Job }) {
 export function ExperienceTimeline() {
   return (
     <Section id="experience" title="Experience">
+      <p className="-mt-4 mb-10 text-sm text-neutral-400">
+        <span className="font-medium text-white">{fullTimeExperience()}</span> full-time
+        <span className="text-neutral-600"> · </span>
+        <span className="font-medium text-white">~{yearsExperience()} years</span> including freelance
+        and contract work
+      </p>
       <div className="space-y-14">
         {experience.map((j) => (
           <Entry key={jobId(j)} job={j} />

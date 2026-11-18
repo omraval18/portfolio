@@ -1,19 +1,12 @@
 import { BOOK_URL, profile, skills } from "@/lib/resume";
+import { CopyPrompt } from "./copy-prompt";
 import { Label } from "./section";
-
-const nav = [
-  ["about", "About"],
-  ["experience", "Experience"],
-  ["projects", "Projects"],
-  ["approach", "Approach"],
-  ["contact", "Contact"],
-];
 
 export function Sidebar() {
   return (
-    <aside className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:w-72 lg:shrink-0 lg:flex-col lg:justify-between lg:gap-8 lg:overflow-y-auto lg:py-16 [scrollbar-width:none]">
+    <aside className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:w-80 lg:shrink-0 lg:flex-col lg:justify-between lg:gap-6 lg:overflow-y-auto lg:py-14 [scrollbar-width:none]">
       <div>
-        <h1 className="font-bricolage text-4xl font-semibold tracking-tight text-white">
+        <h1 className="text-4xl font-semibold tracking-tight text-white">
           {profile.name}
         </h1>
         <p className="mt-2 text-sm text-neutral-400">{profile.role}</p>
@@ -26,17 +19,6 @@ export function Sidebar() {
         </p>
         <p className="mt-1 text-xs text-neutral-600">{profile.location}</p>
 
-        <nav className="mt-10 hidden lg:block">
-          <ul className="space-y-2.5 font-mono text-xs uppercase tracking-widest">
-            {nav.map(([id, label]) => (
-              <li key={id}>
-                <a href={`#${id}`} className="text-neutral-600 transition-colors hover:text-white">
-                  {label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
 
         <div className="mt-10">
           <Label className="mb-4">Skills</Label>
@@ -56,11 +38,12 @@ export function Sidebar() {
           href={BOOK_URL}
           target="_blank"
           rel="noreferrer"
-          className="mb-6 flex items-center justify-between rounded-md border border-white/15 px-4 py-2.5 text-sm text-white transition-colors hover:bg-white hover:text-black"
+          className="mb-3 flex items-center justify-between rounded-md border border-white/15 px-4 py-2.5 text-sm text-white transition-colors hover:bg-white hover:text-black"
         >
           <span>Book a quick chat</span>
           <span aria-hidden>↗</span>
         </a>
+        <CopyPrompt className="mb-6" />
         <ul className="space-y-3 text-sm">
           {profile.socials.map((s) => (
             <li key={s.label}>

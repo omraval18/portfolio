@@ -21,6 +21,7 @@ const config = {
       fontFamily: {
         bricolage: ["var(--font-bricolage)"],
         inter: ["var(--font-inter)"],
+        mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",

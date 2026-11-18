@@ -9,7 +9,7 @@ import { Sidebar } from "@/components/resume/sidebar";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black font-inter text-neutral-300 antialiased selection:bg-white selection:text-black">
+    <div className="min-h-screen bg-black font-mono text-neutral-300 antialiased selection:bg-white selection:text-black">
       <TimelineRail items={railItems} />
       <div className="mx-auto flex max-w-6xl flex-col gap-12 px-6 py-12 lg:flex-row lg:gap-20 lg:py-0 lg:pr-14 xl:pr-6">
         <Sidebar />

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, Bricolage_Grotesque } from "next/font/google";
+import { Inter, Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SITE_URL, profile } from "@/lib/resume";
 import { ThemeProvider } from "@/components/global/theme-provider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
   variable: "--font-bricolage",
@@ -58,7 +59,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${inter.variable} ${bricolage.variable}`}>
+      <body className={`${inter.variable} ${bricolage.variable} ${mono.variable}`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

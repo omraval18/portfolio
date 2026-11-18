@@ -1,4 +1,4 @@
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://omraval.live";
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://omraval.com";
 export const GITHUB_USER = "omraval18";
 export const BOOK_URL = "https://cal.com/omraval/quick-chat-about-my-work";
 
@@ -263,3 +263,8 @@ export const skills: [string, string[]][] = [
 
 export const slug = (s: string) =>
   s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+export const now =
+  "Going deeper into database internals, operating systems, networking and agent harnesses. Open to AI engineer and backend/infrastructure roles at remote or relocation-friendly startups.";
+
+export const EMAIL = "omrawal111@gmail.com";
